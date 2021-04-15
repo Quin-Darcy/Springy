@@ -11,7 +11,19 @@ class Point {
         this.a = a;
     }
     show() {
-        fill(255);
+        let V = this.vel.magSq();
+        let S = p5.Vector.sub(this.pos, points[this.n].pos).magSq();
+        let p = points[this.n];
+        if (COLOR === 1) {
+            colorMode(HSB, MAX_TEN, 1, 1)
+            stroke(S, 1, 1);
+            line(this.pos.x, this.pos.y, p.pos.x, p.pos.y);
+        } else {
+            stroke(255);
+            line(this.pos.x, this.pos.y, p.pos.x, p.pos.y);
+        }
+        colorMode(HSB, MAX_VEL, 1, 1)
+        fill(V, 1, 1);
         ellipse(this.pos.x, this.pos.y, 2 * this.r);
     }
     collision(i) {
@@ -39,13 +51,13 @@ class Point {
             if (i != this.id) {
                 let d = p5.Vector.sub(this.pos, points[i].pos);
                 let mag = d.magSq() + 1000;
-                d.setMag(Math.pow(-1, this.a) * G * (this.m * points[i].m) / mag);
+                d.setMag(G * (this.m * points[i].m) / mag);
                 this.vel.add(d);
             }
         }
         let force = p5.Vector.sub(this.pos, points[this.n].pos);
 
-        let x = (force.mag() - this.l) * 0.26;
+        let x = (force.mag() - this.l) * WEAKEN;
         force.normalize();
         force.mult(-1 * this.k * x);
 
