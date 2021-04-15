@@ -1,9 +1,14 @@
 // Constants
 let W = window.innerWidth;
 let H = window.innerHeight;
-let P = 36;
+let P = 7;
 let THETA = (2 * Math.PI) / P;
-let RADIUS = H / 2 - H / 8;
+let RADIUS;
+if (W >= H) {
+    RADIUS = H / 2 - H / 9;
+} else {
+    RADIUS = W / 2 - W / 9;
+}
 let R = 3;
 let D = 0.89; // Dampen value
 let G = 9.8;
@@ -14,9 +19,9 @@ let I = -1;
 let MAX_VEL = 0;
 let MAX_TEN = 0;
 let COLOR = 1;
-let V0 = 0;
-let POINT_MASS = 3 / P;
-let K = 0.06; // Springiness
+let V0 = 1;
+let POINT_MASS = P / (P + 1);
+let K = P / (Math.pow(P, 2)); // Springiness
 let WEAKEN = 0.26;
 
 // Arrays
@@ -26,7 +31,6 @@ function setup() {
     createCanvas(W, H);
     background(0);
     for (let i = 0; i < P; i++) {
-        let rand = 0;
         let X = floor(W / 2 + RADIUS * cos(i * THETA));
         let Y = floor(H / 2 + RADIUS * sin(i * THETA));
         let U = V0 * cos(i * THETA + Math.PI / 2);
