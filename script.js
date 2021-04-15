@@ -1,9 +1,9 @@
 // Constants
 let W = window.innerWidth;
 let H = window.innerHeight;
-let P = 13;
+let P = 36;
 let THETA = (2 * Math.PI) / P;
-let RADIUS = 350;
+let RADIUS = H / 2 - H / 8;
 let R = 3;
 let D = 0.89; // Dampen value
 let G = 9.8;
@@ -15,7 +15,7 @@ let MAX_VEL = 0;
 let MAX_TEN = 0;
 let COLOR = 1;
 let V0 = 0;
-let POINT_MASS = 5;
+let POINT_MASS = 3 / P;
 let K = 0.06; // Springiness
 let WEAKEN = 0.26;
 
